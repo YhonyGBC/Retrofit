@@ -2,6 +2,7 @@ package com.example.retrofit.data
 
 import com.example.retrofit.data.model.RemoteResult
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,7 +18,10 @@ interface RetrofitService {
 
     object RetrofitServiceFactory {
         fun makeRetrofitService(): RetrofitService {
-            return  Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/").build().create(RetrofitService::class.java)
+            return  Retrofit.Builder()
+                .baseUrl("https://api.themoviedb.org/3/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(RetrofitService::class.java)
         }
     }
 }
